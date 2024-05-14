@@ -1,15 +1,15 @@
 class Tmp < Formula
   desc "RAII-wrappers for unique temporary files and directories for modern C++"
   homepage "https://github.com/bugdea1er/tmp"
-  url "https://github.com/bugdea1er/tmp/archive/refs/tags/v0.7.tar.gz"
-  sha256 "6d98e71d4ca08fee1f799b906579f83e67e2c80d1baf73c00024392d070eff51"
+  url "https://github.com/bugdea1er/tmp/archive/refs/tags/v0.7.1.tar.gz"
+  sha256 "e01004d36fd462230f98ead6d444f6396d1a58dc89c3347ac3d92ca0b6f936bf"
   license "MIT"
   head "https://github.com/bugdea1er/tmp.git", branch: "main"
 
   depends_on "cmake" => :build
 
   def install
-    system "cmake", "-S", ".", "-B", "build", "-DTMP_TEST=OFF", *std_cmake_args
+    system "cmake", "-S", ".", "-B", "build", *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end
