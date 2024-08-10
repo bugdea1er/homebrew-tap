@@ -12,7 +12,7 @@ class Tmp < Formula
     system "cmake", "-S", ".", "-B", "build", "-DBUILD_SHARED_LIBS=TRUE", *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
-    
+
     system "cmake", "-S", ".", "-B", "build-static", "-DBUILD_SHARED_LIBS=FALSE", *std_cmake_args
     system "cmake", "--build", "build-static"
     lib.install "build-static/libtmp.a"
