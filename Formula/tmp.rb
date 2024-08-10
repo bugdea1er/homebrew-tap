@@ -2,7 +2,7 @@ class Tmp < Formula
   desc "RAII-wrappers for unique temporary files and directories for modern C++"
   homepage "https://github.com/bugdea1er/tmp"
   url "https://github.com/bugdea1er/tmp/archive/refs/tags/v1.0.tar.gz"
-  sha256 "d00228f5913af02434cbc8d0a9e595dd9822d5038fe711c4df6c0c0870e5a773"
+  sha256 "255ac6c926ee91c0afcc051b8f0befa909777c04d00de3aaa13ad06165fcacc0"
   license "MIT"
   head "https://github.com/bugdea1er/tmp.git", branch: "main"
 
@@ -15,15 +15,15 @@ class Tmp < Formula
 
     system "cmake", "-S", ".", "-B", "build-static", "-DBUILD_SHARED_LIBS=FALSE", *std_cmake_args
     system "cmake", "--build", "build-static"
-    lib.install "build-static/libtmp.a"
+    lib.install "build-static/src/libtmp.a"
   end
 
   test do
     (testpath/"test.cpp").write <<~EOS
-      #include <iostream>
+      #include <filesystem>
       #include <tmp/file>
       int main() {
-        std::cout << tmp::file().release().native();
+        return std::filesystem::exists(tmp::file()) ? EXIT_SUCCESS : EXIT_FAILURE;
       }
     EOS
 
@@ -31,6 +31,6 @@ class Tmp < Formula
                   "-I#{include}",
                   "-L#{lib}",
                   "-ltmp"
-    assert_predicate Pathname.new(shell_output("./test")), :exist?
+    shell_output("./test")
   end
 end
