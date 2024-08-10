@@ -1,25 +1,29 @@
 class Tmp < Formula
   desc "RAII-wrappers for unique temporary files and directories for modern C++"
   homepage "https://github.com/bugdea1er/tmp"
-  url "https://api.github.com/repos/bugdea1er/tmp/tarball/v0.9"
-  sha256 "589a991d8baa8567bfed3c5b7ea13931ad9b74d6c93fa5ff4eb9f827edfe9428"
+  url "https://github.com/bugdea1er/tmp/archive/refs/tags/v1.0.tar.gz"
+  sha256 "255ac6c926ee91c0afcc051b8f0befa909777c04d00de3aaa13ad06165fcacc0"
   license "MIT"
   head "https://github.com/bugdea1er/tmp.git", branch: "main"
 
   depends_on "cmake" => :build
 
   def install
-    system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    system "cmake", "-S", ".", "-B", "build", "-DBUILD_SHARED_LIBS=TRUE", *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
+
+    system "cmake", "-S", ".", "-B", "build-static", "-DBUILD_SHARED_LIBS=FALSE", *std_cmake_args
+    system "cmake", "--build", "build-static"
+    lib.install "build-static/src/libtmp.a"
   end
 
   test do
     (testpath/"test.cpp").write <<~EOS
-      #include <iostream>
+      #include <filesystem>
       #include <tmp/file>
       int main() {
-        std::cout << tmp::file().release().native();
+        return std::filesystem::exists(tmp::file()) ? EXIT_SUCCESS : EXIT_FAILURE;
       }
     EOS
 
@@ -27,6 +31,6 @@ class Tmp < Formula
                   "-I#{include}",
                   "-L#{lib}",
                   "-ltmp"
-    assert_predicate Pathname.new(shell_output("./test")), :exist?
+    shell_output("./test")
   end
 end
