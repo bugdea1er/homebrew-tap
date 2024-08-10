@@ -2,7 +2,7 @@ class Tmp < Formula
   desc "RAII-wrappers for unique temporary files and directories for modern C++"
   homepage "https://github.com/bugdea1er/tmp"
   url "https://github.com/bugdea1er/tmp/archive/refs/tags/v1.0.tar.gz"
-  sha256 "255ac6c926ee91c0afcc051b8f0befa909777c04d00de3aaa13ad06165fcacc0"
+  sha256 "662e8dcf924b4838a1b28dce61d0d6631daee9a66cf26728017263df4011cd5e"
   license "MIT"
   head "https://github.com/bugdea1er/tmp.git", branch: "main"
 
