@@ -1,10 +1,12 @@
-class Tmp < Formula
+class TmpAT2 < Formula
   desc "RAII-wrappers for unique temporary files and directories for modern C++"
   homepage "https://github.com/bugdea1er/tmp"
-  url "https://github.com/bugdea1er/tmp/archive/refs/tags/v3.tar.gz"
-  sha256 "e68167a958500e81490d13d5691f80959face520b180d518b6ef49385f1d5d56"
+  url "https://github.com/bugdea1er/tmp/archive/refs/tags/v2.1.tar.gz"
+  sha256 "0ebd2e787e8c23681da1ea0c4e31276827c323b28902f9083675c1909f2c375a"
   license "MIT"
   head "https://github.com/bugdea1er/tmp.git", branch: "main"
+
+  keg_only :versioned_formula
 
   depends_on "cmake" => :build
 
@@ -21,9 +23,9 @@ class Tmp < Formula
   test do
     (testpath/"test.cpp").write <<~EOS
       #include <filesystem>
-      #include <tmp/directory>
+      #include <tmp/file>
       int main() {
-        return std::filesystem::exists(tmp::directory()) ? EXIT_SUCCESS : EXIT_FAILURE;
+        return std::filesystem::exists(tmp::file()) ? EXIT_SUCCESS : EXIT_FAILURE;
       }
     EOS
 
