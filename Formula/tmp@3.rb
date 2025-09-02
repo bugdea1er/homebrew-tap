@@ -1,10 +1,12 @@
-class Tmp < Formula
+class TmpAT3 < Formula
   desc "RAII-wrappers for unique temporary files and directories for modern C++"
   homepage "https://github.com/bugdea1er/tmp"
-  url "https://github.com/bugdea1er/tmp/archive/refs/tags/v4.tar.gz"
-  sha256 "9fc04477d7839d004e636184691c270e510e67dcce78add38b5d04cbf79652f6"
+  url "https://github.com/bugdea1er/tmp/archive/refs/tags/v3.0.1.tar.gz"
+  sha256 "de367d91a4552bd7ea02d077737b0a58e91aa50ae0084e40402ad9534d2ba6a9"
   license "MIT"
   head "https://github.com/bugdea1er/tmp.git", branch: "main"
+
+  keg_only :versioned_formula
 
   depends_on "cmake" => :build
 
